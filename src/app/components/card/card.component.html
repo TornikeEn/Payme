@@ -1,0 +1,29 @@
+<div class="card" [ngClass]="{'background-image': backgroundImage}">
+    <div>
+        <div class="d-flex align-items-center">
+            <img class="card-icon" *ngIf="icon" [src]="'assets/icons/' + icon + '.svg'" [alt]="icon">
+            <div class="">
+                <h1 class="card-name">{{name}}</h1>
+                <p *ngIf="donations" class="card-donations">Donations ({{donations}})</p>
+            </div>
+        </div>
+        <div class="d-flex flex-column justify-content-end">
+            <p *ngIf="balance" class="card-balance">{{balance}}</p>
+            <p *ngIf="accountNumber" class="account-number">{{accountNumber}}</p>
+            <p *ngIf="donationsAmount" class="card-donations-amount">€{{donationsAmount}}/<span>€{{donationsVolume}}</span></p>
+            <p *ngIf="cardNumber" class="card-number">{{cardNumber}}</p>
+        </div>
+    </div>
+    <ng-container *ngIf="type">
+        <div class="d-flex flex-column justify-content-between">
+            <img *ngIf="type" [src]="'assets/icons/' + type + '.svg'" [alt]="type">
+            <p *ngIf="expirationDate"class="card-expiration-date">{{expirationDate}}</p>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="otherTypeCardBalanceEuro">
+        <div class="d-flex flex-column justify-content-center align-items-end">
+            <p class="othertype-card-balance-euro" *ngIf="otherTypeCardBalanceEuro">{{otherTypeCardBalanceEuro}} <span>EUR</span></p>
+            <p class="othertype-card-balance-gel" *ngIf="otherTypeCardBalanceGel">₾ {{otherTypeCardBalanceGel}}</p>
+        </div>
+    </ng-container>
+</div>

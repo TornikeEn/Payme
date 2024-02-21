@@ -1,0 +1,11 @@
+<nav class="navbar">
+  <ul>
+    <li *ngFor="let navigationItem of navigationItems">
+      <a class="nav-link" [routerLink]="navigationItem.name" routerLinkActive="active-link">
+        <div class="nav-icon" [ngStyle]="{'mask-image': 'url(/assets/icons/' + navigationItem.name + navigationItem.type +')'}"
+        ></div>
+        {{ navigationItem.name }}
+      </a>
+    </li>
+  </ul>
+</nav>

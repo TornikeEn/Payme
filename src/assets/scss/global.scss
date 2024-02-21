@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    height: 100%;
+  }
+  
+  body {
+    margin: 0;
+    font-family: "Poppins", "Helvetica Neue", sans-serif;
+    font-style: normal;
+    background-color: var(--secondaryGray);
+  }
+
+  button {
+    font-family: "Poppins", "Helvetica Neue", sans-serif;
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .flex-column {
+    flex-direction: column;
+  }
+
+  .justify-content-center {
+    justify-content: center;
+  }
+
+  .justify-content-between {
+    justify-content: space-between;
+  }
+  
+  .justify-content-end {
+    justify-content: flex-end;
+  }
+
+  .align-items-center {
+    align-items: center;
+  }
+  .align-items-end {
+    align-items: flex-end;
+  }
