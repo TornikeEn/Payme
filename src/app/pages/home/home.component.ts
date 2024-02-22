@@ -1,11 +1,14 @@
-import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
+  ngOnInit(): void {
+    // window.scrollTo({ top: 0});
+  }
   activeTab: number = 0;
   sections: any = [
     {
@@ -77,17 +80,19 @@ export class HomeComponent {
       ],
     },
   ];
-
+  
   @ViewChild('container') container!: ElementRef;
 
   @HostListener('window:scroll', ['$event']) onScroll(event: Event) {
     const scrollPosition = (event.target as Document).documentElement.scrollTop;
-    if(scrollPosition > 0) {
-      this.container.nativeElement.querySelector('.header-hint').classList.add('header-small-hint');
-      this.container.nativeElement.querySelector('.header-balance').classList.add('header-small-balance')
-    } else {
-      this.container.nativeElement.querySelector('.header-hint').classList.remove('header-small-hint');
-      this.container.nativeElement.querySelector('.header-balance').classList.remove('header-small-balance')
-    }
+    const headerHint = this.container.nativeElement.querySelector('.header-hint').classList;
+    const headerBalance = this.container.nativeElement.querySelector('.header-balance').classList;
+      if (scrollPosition > 0) {
+        headerHint.add('header-small-hint');
+        headerBalance.add('header-small-balance');
+      } else {
+        headerHint.remove('header-small-hint');
+        headerBalance.remove('header-small-balance');
+      }
   }
 }
