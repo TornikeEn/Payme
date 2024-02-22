@@ -12,6 +12,7 @@
     font-family: "Poppins", "Helvetica Neue", sans-serif;
     font-style: normal;
     background-color: var(--secondaryGray);
+    scroll-behavior: smooth;
   }
 
   button {
@@ -47,4 +48,8 @@
   }
   .align-items-end {
     align-items: flex-end;
+  }
+
+  .px-1rem {
+    padding: 0 1rem;
   }

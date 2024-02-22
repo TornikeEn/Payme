@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -77,4 +77,17 @@ export class HomeComponent {
       ],
     },
   ];
+
+  @ViewChild('container') container!: ElementRef;
+
+  @HostListener('window:scroll', ['$event']) onScroll(event: Event) {
+    const scrollPosition = (event.target as Document).documentElement.scrollTop;
+    if(scrollPosition > 0) {
+      this.container.nativeElement.querySelector('.header-hint').classList.add('header-small-hint');
+      this.container.nativeElement.querySelector('.header-balance').classList.add('header-small-balance')
+    } else {
+      this.container.nativeElement.querySelector('.header-hint').classList.remove('header-small-hint');
+      this.container.nativeElement.querySelector('.header-balance').classList.remove('header-small-balance')
+    }
+  }
 }
