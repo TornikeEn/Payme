@@ -102,7 +102,7 @@ export class HomeComponent {
       movable.style.top = `${movableLastPosition}%`;
     }
 
-    // Reduce header hint element font size smoothly while scrolled
+    // Reduce header hint element font size and opacity smoothly while scrolled
     const hintIninitalFontSize = 14;
     const hintLastFontSize = 0;
     const hintNewFontSize = hintIninitalFontSize - (scrollPosition * 0.3);
@@ -111,6 +111,16 @@ export class HomeComponent {
       hint.style.fontSize = `${hintNewFontSize}px`;
     } else {
       hint.style.fontSize = `${hintLastFontSize}px`;
+    }
+
+    const hintIninitalopacity = 1;
+    const hintLastopacity = 0;
+    const hintNewopacity = hintIninitalopacity - (scrollPosition * 0.15);
+    
+    if (hintNewopacity >= hintLastopacity) {
+      hint.style.opacity = hintNewopacity;
+    } else {
+      hint.style.opacity = hintLastopacity;
     }
 
     // Reduce header balance element font size smoothly while scrolled
