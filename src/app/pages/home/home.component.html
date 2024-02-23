@@ -10,35 +10,37 @@
                 <img class="header-icon" src="assets/icons/support.svg" alt="support">
             </div>
         </div>
-        <p class="header-hint">Available Balance</p>
-        <div class="header-balance">
-            ₾4,562.52 <img src="assets/icons/arrow-down.svg" alt="arrow-down">
-        </div>
-
-        <div class="tabBar-container">
-            <div class="tabBar">
-                <section class="offer">
-                    <img class="offer-icon-gift" src="assets/icons/gift.svg" alt="gift">
-                    <div class="offer-content w-full d-flex justify-content-between align-items-center">
-                        <div class="d-flex flex-column justify-content-center">
-                            <h2 class="offer-title">
-                                Zero free first purchase
-                            </h2>
-                            <p class="offer-description">
-                                For new users. <a routerLink="/home">Learn more</a>
-                            </p>
-                        </div>
-                        <img class="offer-icon-close" src="assets/icons/close.svg" alt="close">
-                    </div>
-                </section>
-                <section class="btn-group">
-                    <button [ngClass]="{'btn': true, 'btn-active': activeTab === 0}"  type="button" (click)="activeTab = 0">Accounts</button>
-                    <button [ngClass]="{'btn': true, 'btn-active': activeTab === 1}" type="button" (click)="activeTab = 1">Crypto</button>
-                    <button [ngClass]="{'btn': true, 'btn-active': activeTab === 2}" type="button" (click)="activeTab = 2">NFT</button>
-                </section>
+        <div class="header-movable">
+            <p class="header-hint">Available Balance</p>
+            <div class="header-balance">
+                ₾4,562.52 <img src="assets/icons/arrow-down.svg" alt="arrow-down">
             </div>
         </div>
     </header>
+
+    <div class="tabBar-container">
+        <div class="tabBar">
+            <section class="offer">
+                <img class="offer-icon-gift" src="assets/icons/gift.svg" alt="gift">
+                <div class="offer-content w-full d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-column justify-content-center">
+                        <h2 class="offer-title">
+                            Zero free first purchase
+                        </h2>
+                        <p class="offer-description">
+                            For new users. <a routerLink="/home">Learn more</a>
+                        </p>
+                    </div>
+                    <img class="offer-icon-close" src="assets/icons/close.svg" alt="close">
+                </div>
+            </section>
+            <section class="btn-group">
+                <button [ngClass]="{'btn': true, 'btn-active': activeTab === 0}"  type="button" (click)="activeTab = 0">Accounts</button>
+                <button [ngClass]="{'btn': true, 'btn-active': activeTab === 1}" type="button" (click)="activeTab = 1">Crypto</button>
+                <button [ngClass]="{'btn': true, 'btn-active': activeTab === 2}" type="button" (click)="activeTab = 2">NFT</button>
+            </section>
+        </div>
+    </div>
 
     <main class="main">
         <section *ngFor="let section of sections" [id]="section.identifier">

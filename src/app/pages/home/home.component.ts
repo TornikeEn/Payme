@@ -1,14 +1,11 @@
-import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit {
-  ngOnInit(): void {
-    // window.scrollTo({ top: 0});
-  }
+export class HomeComponent {
   activeTab: number = 0;
   sections: any = [
     {
@@ -85,14 +82,31 @@ export class HomeComponent implements OnInit {
 
   @HostListener('window:scroll', ['$event']) onScroll(event: Event) {
     const scrollPosition = (event.target as Document).documentElement.scrollTop;
-    const headerHint = this.container.nativeElement.querySelector('.header-hint').classList;
-    const headerBalance = this.container.nativeElement.querySelector('.header-balance').classList;
-      if (scrollPosition > 0) {
-        headerHint.add('header-small-hint');
-        headerBalance.add('header-small-balance');
-      } else {
-        headerHint.remove('header-small-hint');
-        headerBalance.remove('header-small-balance');
-      }
+    const headerMovable = this.container.nativeElement.querySelector('.header-movable');
+    const headerHint = this.container.nativeElement.querySelector('.header-hint');
+    const headerBalance = this.container.nativeElement.querySelector('.header-balance');
+
+    const newPosition = 70 - (scrollPosition * 0.4); // Example: Reduce by 0.3% per pixel scrolled
+    const hintNewFontSize = 14 - (scrollPosition * 0.3); // Example: Reduce by 0.3% per pixel scrolled
+    const balanceNewFontSize = 32 - (scrollPosition * 0.3); // Example: Reduce by 0.3% per pixel scrolled
+
+    // Ensure the new position stays within bounds
+    if (newPosition >= 36) {
+      headerMovable.style.top = `${newPosition}%`;
+    } else {
+      headerMovable.style.top = '36%';
+    }
+    
+    if (hintNewFontSize >= 0) {
+      headerHint.style.fontSize = `${hintNewFontSize}px`;
+    } else {
+      headerHint.style.fontSize = '0px';
+    }
+
+    if (balanceNewFontSize >= 18) {
+      headerBalance.style.fontSize = `${balanceNewFontSize}px`;
+    } else {
+      headerBalance.style.fontSize = '18px';
+    }
   }
 }
