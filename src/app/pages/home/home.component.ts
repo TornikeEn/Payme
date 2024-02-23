@@ -85,52 +85,40 @@ export class HomeComponent {
     return this.container.nativeElement.querySelector(`.${className}`);
   }
 
+  
+  // Function for element property reduce smoothly while scrolled
+  reduceElementProperty(
+    scrollPosition: number,
+    element: any,
+    propertyName: string,
+    initialProperty: number,
+    lastProperty: number,
+    ratio: number,
+    propertyType?: string
+    ) {
+    const newProperty = initialProperty - (scrollPosition * ratio);
+
+    if (newProperty >= lastProperty) {
+      element.style[propertyName] =  propertyType ? `${newProperty}${propertyType}` : newProperty;
+    } else {
+      element.style[propertyName] = propertyType ? `${lastProperty}${propertyType}`: lastProperty;
+    }
+  }
+
   @HostListener('window:scroll', ['$event']) onScroll(event: Event) {
     const scrollPosition = (event.target as Document).documentElement.scrollTop;
     const movable = this.getElement('header-movable');
     const hint = this.getElement('header-hint');
     const balance = this.getElement('header-balance');
 
-    // Reduce movable element position smoothly while scrolled
-    const movableIninitalPosition = 70;
-    const movableLastPosition = 36;
-    const movableNewPosition = movableIninitalPosition - (scrollPosition * 0.5);
-
-    if (movableNewPosition >= movableLastPosition) {
-      movable.style.top = `${movableNewPosition}%`;
-    } else {
-      movable.style.top = `${movableLastPosition}%`;
-    }
-
-    // Reduce header hint element font size and opacity smoothly while scrolled
-    const hintIninitalFontSize = 14;
-    const hintLastFontSize = 0;
-    const hintNewFontSize = hintIninitalFontSize - (scrollPosition * 0.3);
+    // Reduce movable element position top smoothly from 70% to 36% while scrolled
+    this.reduceElementProperty(scrollPosition, movable, 'top', 70, 36, 0.5, '%');
     
-    if (hintNewFontSize >= hintLastFontSize) {
-      hint.style.fontSize = `${hintNewFontSize}px`;
-    } else {
-      hint.style.fontSize = `${hintLastFontSize}px`;
-    }
-
-    const hintIninitalopacity = 1;
-    const hintLastopacity = 0;
-    const hintNewopacity = hintIninitalopacity - (scrollPosition * 0.15);
-    
-    if (hintNewopacity >= hintLastopacity) {
-      hint.style.opacity = hintNewopacity;
-    } else {
-      hint.style.opacity = hintLastopacity;
-    }
-
+    // Reduce header hint element font size from 14px to 0px and opacity from 1 to 0 smoothly while scrolled
+    this.reduceElementProperty(scrollPosition, hint, 'fontSize', 14, 0, 0.3, 'px');
+    this.reduceElementProperty(scrollPosition, hint, 'opacity', 1, 0, 0.15);
+ 
     // Reduce header balance element font size smoothly while scrolled
-    const balanceIninitalFontSize = 32;
-    const balanceLastFontSize = 18;
-    const balanceNewFontSize = balanceIninitalFontSize - (scrollPosition * 0.3);
-    if (balanceNewFontSize >= balanceLastFontSize) {
-      balance.style.fontSize = `${balanceNewFontSize}px`;
-    } else {
-      balance.style.fontSize = `${balanceLastFontSize}px`;
-    }
+    this.reduceElementProperty(scrollPosition, balance, 'fontSize', 32, 18, 0.3, 'px');
   }
 }
