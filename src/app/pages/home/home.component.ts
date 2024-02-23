@@ -5,6 +5,7 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
+
 export class HomeComponent {
   activeTab: number = 0;
   sections: any = [
@@ -80,33 +81,46 @@ export class HomeComponent {
   
   @ViewChild('container') container!: ElementRef;
 
+  getElement(className: string) {
+    return this.container.nativeElement.querySelector(`.${className}`);
+  }
+
   @HostListener('window:scroll', ['$event']) onScroll(event: Event) {
     const scrollPosition = (event.target as Document).documentElement.scrollTop;
-    const headerMovable = this.container.nativeElement.querySelector('.header-movable');
-    const headerHint = this.container.nativeElement.querySelector('.header-hint');
-    const headerBalance = this.container.nativeElement.querySelector('.header-balance');
+    const movable = this.getElement('header-movable');
+    const hint = this.getElement('header-hint');
+    const balance = this.getElement('header-balance');
 
-    const newPosition = 70 - (scrollPosition * 0.4); // Example: Reduce by 0.3% per pixel scrolled
-    const hintNewFontSize = 14 - (scrollPosition * 0.3); // Example: Reduce by 0.3% per pixel scrolled
-    const balanceNewFontSize = 32 - (scrollPosition * 0.3); // Example: Reduce by 0.3% per pixel scrolled
+    // Reduce movable element position smoothly while scrolled
+    const movableIninitalPosition = 70;
+    const movableLastPosition = 36;
+    const movableNewPosition = movableIninitalPosition - (scrollPosition * 0.5);
 
-    // Ensure the new position stays within bounds
-    if (newPosition >= 36) {
-      headerMovable.style.top = `${newPosition}%`;
+    if (movableNewPosition >= movableLastPosition) {
+      movable.style.top = `${movableNewPosition}%`;
     } else {
-      headerMovable.style.top = '36%';
+      movable.style.top = `${movableLastPosition}%`;
     }
+
+    // Reduce header hint element font size smoothly while scrolled
+    const hintIninitalFontSize = 14;
+    const hintLastFontSize = 0;
+    const hintNewFontSize = hintIninitalFontSize - (scrollPosition * 0.3);
     
-    if (hintNewFontSize >= 0) {
-      headerHint.style.fontSize = `${hintNewFontSize}px`;
+    if (hintNewFontSize >= hintLastFontSize) {
+      hint.style.fontSize = `${hintNewFontSize}px`;
     } else {
-      headerHint.style.fontSize = '0px';
+      hint.style.fontSize = `${hintLastFontSize}px`;
     }
 
-    if (balanceNewFontSize >= 18) {
-      headerBalance.style.fontSize = `${balanceNewFontSize}px`;
+    // Reduce header balance element font size smoothly while scrolled
+    const balanceIninitalFontSize = 32;
+    const balanceLastFontSize = 18;
+    const balanceNewFontSize = balanceIninitalFontSize - (scrollPosition * 0.3);
+    if (balanceNewFontSize >= balanceLastFontSize) {
+      balance.style.fontSize = `${balanceNewFontSize}px`;
     } else {
-      headerBalance.style.fontSize = '18px';
+      balance.style.fontSize = `${balanceLastFontSize}px`;
     }
   }
 }

@@ -5,18 +5,19 @@ import { Component, Input } from '@angular/core';
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss'
 })
+
 export class CardComponent {
   @Input()backgroundImage: boolean = false;
-  @Input()name: string = '';
-  @Input()icon: string = '';
-  @Input()type: string = '';
-  @Input()expirationDate: string = '';
-  @Input()balance: string = '';
-  @Input()otherTypeCardBalanceEuro: string = '';
-  @Input()otherTypeCardBalanceGel: string = '';
-  @Input()accountNumber: string = '';
-  @Input()cardNumber: string = '';
-  @Input()donations: number = 0;
-  @Input()donationsAmount: string = '';
-  @Input()donationsVolume: string = '';
+  @Input()name = '';
+  @Input()icon = '';
+  @Input()type = '';
+  @Input()expirationDate = '';
+  @Input()balance = '';
+  @Input()otherTypeCardBalanceEuro = '';
+  @Input()otherTypeCardBalanceGel = '';
+  @Input()accountNumber = '';
+  @Input()cardNumber = '';
+  @Input()donations = 0;
+  @Input()donationsAmount = '';
+  @Input()donationsVolume = '';
 }
