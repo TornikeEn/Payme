@@ -118,7 +118,7 @@ export class HomeComponent {
     this.reduceElementProperty(scrollPosition, hint, 'fontSize', 14, 0, 0.3, 'px');
     this.reduceElementProperty(scrollPosition, hint, 'opacity', 1, 0, 0.15);
  
-    // Reduce header balance element font size smoothly while scrolled
+    // Reduce header balance element font size from 32px to 18px smoothly while scrolled
     this.reduceElementProperty(scrollPosition, balance, 'fontSize', 32, 18, 0.3, 'px');
   }
 }
